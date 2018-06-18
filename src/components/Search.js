@@ -24,14 +24,21 @@ class Search extends Component {
 
     updateState[fieldName] = fieldValue;
     this.setState(updateState);
+    console.log(this.state.text)
   }
 
   onFormSubmit = (event) => {
-  event.preventDefault();
+    event.preventDefault();
 
-  this.props.searchCallback(this.state);
-  this.clearForm();
-}
+    this.props.searchCallback(this.state.text);
+    this.clearForm();
+  }
+
+  clearForm = () => {
+    this.setState({
+      text: '',
+    });
+  }
 
 
   render() {
@@ -49,8 +56,7 @@ class Search extends Component {
               type="text"
               onChange = {this.onFieldChange}
               />
-          </div>
-          {this.props.searchCallback}
+          </div>s
 
           <input type="submit" value="Search" className="movie-search-form__form-button" />
         </form>
