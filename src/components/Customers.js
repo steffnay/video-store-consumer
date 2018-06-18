@@ -1,14 +1,27 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import {
-    BrowserRouter as Router,
-    Route,
-    Link
+  BrowserRouter as Router,
+  Route,
+  Link
 } from 'react-router-dom'
 
-import './App.css';
 
-class App extends Component {
+
+class Customers extends Component {
+
+  customers = () => {
+    let customersList = [];
+    axios.get(`http://localhost:4000/customers/`)
+        .then((response) => {
+          const customersList = response.data.map(inputCard => inputCard.card);
+        })
+        .catch((error) => {
+          console.log({ error: error.message});
+        });
+
+  };
+
   render() {
 
     const home = () => {
@@ -38,3 +51,6 @@ class App extends Component {
 }
 
 export default App;
+
+
+
