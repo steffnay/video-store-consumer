@@ -7,6 +7,8 @@ import {
 } from 'react-router-dom'
 
 import './App.css';
+import Search from './components/Search'
+
 
 class App extends Component {
   render() {
@@ -20,7 +22,7 @@ class App extends Component {
           <section>
             <ul>
               <li><Link to="/">Home</Link></li>
-              {/*<li><Link to="/search">Search</Link></li>*/}
+              <li><Link to="/search">Search</Link></li>
               {/*<li><Link to="/library">Library</Link></li>*/}
               {/*<li><Link to="/customers">Customers</Link></li>*/}
             </ul>
@@ -28,7 +30,7 @@ class App extends Component {
             <hr/>
 
             <Route exact path="/" component={home}/>
-            {/*<Route path="/search" component={Search}/>*/}
+            <Route path="/search" render={()=><Search searchCallback='okiedokie'/>}/>
             {/*<Route path="/library" component={Library}/>*/}
             {/*<Route path="/customers" component={Customers}/>*/}
           </section>
