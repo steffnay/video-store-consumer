@@ -8,9 +8,11 @@ class Rentals extends Component {
 
     this.state = {
       rentalsList: [],
+      onlyOverdue: false
     };
   }
 
+  // getUrl = () => { return this.state.onlyOverdue ? 'http://localhost:3000/rentals/' :  'http://localhost:3000/rentals/'};
 
   componentDidMount = () => {
     console.log('Component did mount was called');
