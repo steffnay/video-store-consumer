@@ -38,7 +38,7 @@ class Movie extends Component {
 }
 
 Movie.propTypes = {
-  title: PropTypes.string.isRequired,
+  customer: PropTypes.string.isRequired,
   overview: PropTypes.string.isRequired,
   releaseDate: PropTypes.string.isRequired,
   imageUrl: PropTypes.string.isRequired,
