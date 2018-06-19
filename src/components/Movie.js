@@ -45,5 +45,4 @@ Movie.propTypes = {
   addMovieCallback: PropTypes.func,
   externalId: PropTypes.number.isRequired,
 };
-
 export default Movie;
