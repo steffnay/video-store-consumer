@@ -19,9 +19,22 @@ class Search extends Component {
     };
   }
 
+  addMovieToInventory = (movieData) => {
+    console.log('hello')
+    console.log(movieData)
+    axios.post('http://localhost:3000/movies', movieData)
+     .then((response) => {
+
+       console.log(response)
+     })
+     .catch((error) => {
+       this.setState({ error: error.message });
+     });
+  }
+
   movieSearch = (title) => {
-  console.log('yay')
-  console.log(title)
+  console.log('yay');
+  console.log(title);
 
     const BASE_URL = 'http://localhost:3000/movies?query='
     console.log(`${BASE_URL}${title}`)
@@ -30,18 +43,20 @@ class Search extends Component {
       console.log('Rendering Movie List')
 
 
-        const movieList = response.data.map((result) => {
+        const movieList = response.data.map((result, index) => {
         return (
           <Movie
             title={result.title}
             overview={result.overview}
-            release_date={result.release_date}
-            image_url={result.image_url}
-            key={result.external_id}
+            releaseDate={result.release_date}
+            imageUrl={result.image_url}
+            key={index}
+            externalId={result.external_id}
+            addMovieCallback={this.addMovieToInventory}
           />
         )
       })
-      console.log('setting state')
+      console.log('setting state');
       this.setState({
         results: movieList,
       });

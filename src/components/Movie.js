@@ -11,13 +11,28 @@ import {
 
 class Movie extends Component {
 
+  handleClick = () => {
+    this.props.addMovieCallback({
+      title: this.props.title,
+      image_url: this.props.imageUrl,
+      release_date: this.props.releaseDate,
+      overview: this.props.overview,
+      external_id: this.props.externalId
+    })
+  }
+
   render() {
 
     return (
       <section>
-        <p>{this.props.title}</p>
-      </section>
+        <h3>{this.props.title}</h3>
+        <p><img src={this.props.imageUrl} alt="movie cover"/></p>
+        <p>{this.props.overview}</p>
+        <p>{this.props.releaseDate}</p>
 
+        <button onClick={this.handleClick}>Add to Inventory</button>
+
+      </section>
     );
   }
 }
@@ -25,7 +40,10 @@ class Movie extends Component {
 Movie.propTypes = {
   title: PropTypes.string.isRequired,
   overview: PropTypes.string.isRequired,
-  release_date: PropTypes.string.isRequired,
-  image_url: PropTypes.string.isRequired,
+  releaseDate: PropTypes.string.isRequired,
+  imageUrl: PropTypes.string.isRequired,
+  addMovieCallback: PropTypes.func,
+  externalId: PropTypes.number.isRequired,
 };
+
 export default Movie;
