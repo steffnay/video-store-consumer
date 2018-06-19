@@ -1,6 +1,14 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
+const Customer = (props) => {
+  return (
+    <section key={props.id}>
+      <li>{props.name}</li>
+      <button onClick={() => {props.customerButtonHandler(props.id)} }> Add to rental </button>
+    </section>)
+}
+
 class Customers extends Component {
   constructor() {
     super();
@@ -10,25 +18,33 @@ class Customers extends Component {
     };
   }
 
-
   componentDidMount = () => {
     console.log('Component did mount was called');
-    axios.get(`http://localhost:4000/customers/`)
-        .then((response) => {
-          console.log(response.data);
-          this.setState({ customersList: response.data });
-        })
-        .catch((error) => {
-          console.log(error);
-          this.setState({ error: error.message });
-        });
+    axios.get(`http://localhost:3000/customers/`)
+      .then((response) => {
+        console.log(response.data);
+        this.setState({ customersList: response.data });
+      })
+      .catch((error) => {
+        console.log(error);
+        this.setState({ error: error.message });
+      });
   };
 
+  addCustomerCallback = (rentalID) => {
+    this.props.addCustomerToRental(rentalID)
+    console.log('ok')
+    console.log(rentalID)
+  }
+
   renderCustomersList = () => {
-    return this.state.customersList.map((customerInfo) => <li key={customerInfo.id}>{customerInfo.name}</li>);
+    return this.state.customersList.map((customerInfo) =>
+      <Customer name={customerInfo.name} id={customerInfo.id} customerButtonHandler={this.addCustomerCallback}/>
+    );
   };
 
   render() {
+
 
     return (
       <section className="customer-section">
@@ -40,5 +56,3 @@ class Customers extends Component {
 }
 
 export default Customers;
-
-
