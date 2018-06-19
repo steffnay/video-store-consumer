@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
+// this is a stateless component for customer
 const Customer = (props) => {
   return (
     <section key={props.id}>
@@ -31,10 +32,9 @@ class Customers extends Component {
       });
   };
 
+  // this is a callback that goes to app to add the customer to the app's state
   addCustomerCallback = (rentalID, rentalName) => {
     this.props.addCustomerToRental(rentalID, rentalName)
-    console.log('ok')
-    console.log(rentalID)
   }
 
   renderCustomersList = () => {

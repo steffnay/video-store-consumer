@@ -23,14 +23,13 @@ class App extends Component {
     };
   }
 
+  // axios call for creating rental when button is clicked
   makeNewRental = () => {
     const encodedUri = encodeURI(this.state.rentalMovieTitle)
+
     let dt = new Date();
     dt.setDate(dt.getDate() + 7);
-
     const today = dt.getFullYear() + "/" + (dt.getMonth() + 1) + "/" + dt.getDate();
-
-    console.log(`http://localhost:3000/rentals/${encodedUri}/check-out?customer_id=${this.state.rentalCustomerID}&due_date=${today}`)
 
     axios.post(`http://localhost:3000/rentals/${encodedUri}/check-out?customer_id=${this.state.rentalCustomerID}&due_date=${today}`)
      .then((response) => {
@@ -44,11 +43,10 @@ class App extends Component {
      });
   }
 
+
   addCustomer = (id, name) => {
     this.setState({ rentalCustomerID: id });
     this.setState({ rentalCustomerName: name});
-    console.log('yay')
-    console.log(name)
   }
 
   render() {
@@ -72,12 +70,13 @@ class App extends Component {
     return (
         <Router>
           <div>
+            <img src={'https://preview.ibb.co/n6pjXy/blockbusted.png'} alt="blockbusted logo"/>
             {this.state.message}
-            <nav>
+            <span>
               <StatelessCustomer name={this.state.rentalCustomerName} />
               <StatelessMovie title={this.state.rentalMovieTitle} />
               <StatelessButton handleClick={this.makeNewRental} />
-            </nav>
+            </span>
             <section>
               <ul>
                 <li><Link to="/">Home</Link></li>
