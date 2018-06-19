@@ -20,10 +20,10 @@ class Rental extends Component {
 
   onClickCheckin = () => {
     // if (this.state.returned) { throw Error }
-    axios.post(`http://localhost:3000/rentals/${this.state.name}/return`, {title: this.state.title, customer_id: this.state.customerId})//{title: this.state.title, customer_id: this.state.customerId})
+    axios.post(`http://localhost:3000/rentals/${this.state.title}/return/?customer_id=${this.state.customerId}`)//{title: this.state.title, customer_id: this.state.customerId})
           .then((response) => {
-            console.log(response.data);
-            // this.setState({ rentalsList: this.state.rentalsList});
+            console.log(response);
+            this.setState({ returned: true});
           })
           .catch((error) => {
             console.log(error);
@@ -57,7 +57,7 @@ class Rental extends Component {
 
 
   render() {
-    const status = this.props.returned ? "Returned" : "Checked-Out";
+    const status = this.state.returned ? "Returned" : "Checked-Out";
     const checkinButton = <button onClick={() => this.onClickCheckin()}>Return rental</button>;
   // const checkinButton = if (this.props.returned) { <button onClick={}></button>}
     return (

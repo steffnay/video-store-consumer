@@ -13,7 +13,7 @@ class Customers extends Component {
 
   componentDidMount = () => {
     console.log('Component did mount was called');
-    axios.get(`http://localhost:4000/customers/`)
+    axios.get(`http://localhost:3000/customers/`)
         .then((response) => {
           console.log(response.data);
           this.setState({ customersList: response.data });

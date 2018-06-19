@@ -26,6 +26,7 @@ class Rentals extends Component {
   };
 
   renderRentalsList = () => {
+    console.log(this.state.rentalsList);
     return this.state.rentalsList.map((rentalInfo) => <li key={rentalInfo.id}>
                                                         <Rental title={rentalInfo.title}
                                                                 customerId={rentalInfo.customer_id}
