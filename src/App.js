@@ -12,20 +12,6 @@ import Search from './components/Search'
 
 class App extends Component {
 
-  movieSearch = (title) => {
-  console.log('yay')
-  console.log(title)
-
-    // axios.get('https://inspiration-board.herokuapp.com/boards/steffany/cards', cardInfo)
-    //  .then((response) => {
-    //
-    //    this.componentDidMount()
-    //  })
-    //  .catch((error) => {
-    //    this.setState({ error: error.message });
-    //  });
-  }
-
   render() {
 
     const home = () => {
@@ -46,7 +32,7 @@ class App extends Component {
             <hr/>
 
             <Route exact path="/" component={home}/>
-            <Route path="/search" render={()=><Search searchCallback={this.movieSearch}/>}/>
+            <Route path="/search" component={Search}/>
             {/*<Route path="/library" component={Library}/>*/}
             {/*<Route path="/customers" component={Customers}/>*/}
           </section>

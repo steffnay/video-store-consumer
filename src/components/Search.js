@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import SearchForm from './SearchForm'
 import axios from 'axios';
 import {
   BrowserRouter as Router,
@@ -12,54 +13,29 @@ class Search extends Component {
     super();
 
     this.state = {
-      text: '',
     };
   }
 
+  movieSearch = (title) => {
+  console.log('yay')
+  console.log(title)
 
-  onFieldChange = (event) => {
-    const fieldName = event.target.name;
-    const fieldValue = event.target.value;
-    const updateState = {};
-
-    updateState[fieldName] = fieldValue;
-    this.setState(updateState);
-    console.log(this.state.text)
-  }
-
-  onFormSubmit = (event) => {
-    event.preventDefault();
-
-    this.props.searchCallback(this.state.text);
-    this.clearForm();
-  }
-
-  clearForm = () => {
-    this.setState({
-      text: '',
+    const BASE_URL = 'http://localhost:3000/movies?query='
+    console.log(`${BASE_URL}${title}`)
+    axios.get(`${BASE_URL}${title}`)
+    .then((response) => {
+      console.log(response)
+    })
+     .catch((error) => {
+       this.setState({ error: error.message });
     });
   }
-
 
   render() {
 
     return (
       <section className="movie-search">
-        <h3 className="movie-search-form__header">Find Movie</h3>
-        <form className="movie-search-form__form" onSubmit={this.onFormSubmit}>
-          <div>
-            <label htmlFor="text" className="movie-search-form__form-label">Title: </label>
-            <input
-              className="movie-search-form__form-textarea"
-              name="text"
-              value={this.state.text}
-              type="text"
-              onChange = {this.onFieldChange}
-              />
-          </div>s
-
-          <input type="submit" value="Search" className="movie-search-form__form-button" />
-        </form>
+        <SearchForm searchCallback={this.movieSearch} />
       </section>
     );
   }
