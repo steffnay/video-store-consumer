@@ -18,29 +18,37 @@ class App extends Component {
     this.state = {
       rentalCustomerID: 70,
       rentalCustomerName: 'Minnie Mouse ',
-      rentalMovieTitle: 'Goofy Movie',
+      rentalMovieTitle: 'psycho',
+      message:''
     };
   }
 
   makeNewRental = () => {
     const encodedUri = encodeURI(this.state.rentalMovieTitle)
-    console.log(`http://localhost:3000/rentals/${encodedUri}/check-out?customer_id=${this.state.rentalCustomerID}`)
+    let dt = new Date();
+    dt.setDate(dt.getDate() + 7);
 
-    // axios.post(`http://localhost:3000/rentals/${encodedUri}/check-out?customer_id=${customer}`)
-    //  .then((response) => {
-    //    console.log(response)
-    //    this.setState({message: `${response.data.title} added to inventory.`})
-    //  })
-    //  .catch((error) => {
-    //    console.log(error)
-    //    this.setState({ message: error.message });
-    //  });
+    const today = dt.getFullYear() + "/" + (dt.getMonth() + 1) + "/" + dt.getDate();
+
+    console.log(`http://localhost:3000/rentals/${encodedUri}/check-out?customer_id=${this.state.rentalCustomerID}&due_date=${today}`)
+
+    axios.post(`http://localhost:3000/rentals/${encodedUri}/check-out?customer_id=${this.state.rentalCustomerID}&due_date=${today}`)
+     .then((response) => {
+       console.log(response)
+       console.log('********')
+       this.setState({message: `This rental is due: ${response.data.due_date}`})
+     })
+     .catch((error) => {
+       console.log(error)
+       this.setState({ message: error.message });
+     });
   }
 
-  addCustomer = (id) => {
+  addCustomer = (id, name) => {
     this.setState({ rentalCustomerID: id });
+    this.setState({ rentalCustomerName: name});
     console.log('yay')
-    console.log(id)
+    console.log(name)
   }
 
   render() {
@@ -64,6 +72,7 @@ class App extends Component {
     return (
         <Router>
           <div>
+            {this.state.message}
             <nav>
               <StatelessCustomer name={this.state.rentalCustomerName} />
               <StatelessMovie title={this.state.rentalMovieTitle} />
@@ -83,7 +92,6 @@ class App extends Component {
               <Route path="/search" component={Search}/>
               {/*<Route path="/library" component={Library}/>*/}
               <Route path="/customers" render={()=><Customers addCustomerToRental={this.addCustomer}/>}/>
-              <Route path="/customers" component={Customers}/>
             </section>
           </div>
         </Router>

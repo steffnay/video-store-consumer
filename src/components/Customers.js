@@ -5,7 +5,7 @@ const Customer = (props) => {
   return (
     <section key={props.id}>
       <li>{props.name}</li>
-      <button onClick={() => {props.customerButtonHandler(props.id)} }> Add to rental </button>
+      <button onClick={() => {props.customerButtonHandler(props.id, props.name)} }> Add to rental </button>
     </section>)
 }
 
@@ -31,8 +31,8 @@ class Customers extends Component {
       });
   };
 
-  addCustomerCallback = (rentalID) => {
-    this.props.addCustomerToRental(rentalID)
+  addCustomerCallback = (rentalID, rentalName) => {
+    this.props.addCustomerToRental(rentalID, rentalName)
     console.log('ok')
     console.log(rentalID)
   }
