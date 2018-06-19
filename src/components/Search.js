@@ -13,6 +13,7 @@ class Search extends Component {
     super();
 
     this.state = {
+      results: '',
     };
   }
 
@@ -31,11 +32,29 @@ class Search extends Component {
     });
   }
 
+  renderMovieList = () => {
+    console.log('Rendering Movie List')
+    const movieList = this.state.results.map((result, index) => {
+      return (
+        <Movie
+          id={result.external_id}
+          key={index}
+          text={card.card.text}
+          emoji={card.card.emoji}
+          deleteThisCard={this.deleteCard}
+        />
+      )
+    })
+    console.log(cardList)
+    return cardList;
+  }
+
   render() {
 
     return (
       <section className="movie-search">
         <SearchForm searchCallback={this.movieSearch} />
+        {this.renderMovieList()}
       </section>
     );
   }
