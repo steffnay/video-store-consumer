@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import SearchForm from './SearchForm'
+import Movie from './Movie'
 import axios from 'axios';
 import {
   BrowserRouter as Router,
@@ -13,7 +15,7 @@ class Search extends Component {
     super();
 
     this.state = {
-      results: '',
+      results: [],
     };
   }
 
@@ -25,28 +27,30 @@ class Search extends Component {
     console.log(`${BASE_URL}${title}`)
     axios.get(`${BASE_URL}${title}`)
     .then((response) => {
-      console.log(response)
+      console.log('Rendering Movie List')
+
+
+        const movieList = response.data.map((result) => {
+        return (
+          <Movie
+            title={result.title}
+            overview={result.overview}
+            release_date={result.release_date}
+            image_url={result.image_url}
+            key={result.external_id}
+          />
+        )
+      })
+      console.log('setting state')
+      this.setState({
+        results: movieList,
+      });
     })
      .catch((error) => {
        this.setState({ error: error.message });
     });
-  }
 
-  renderMovieList = () => {
-    console.log('Rendering Movie List')
-    const movieList = this.state.results.map((result, index) => {
-      return (
-        <Movie
-          id={result.external_id}
-          key={index}
-          text={card.card.text}
-          emoji={card.card.emoji}
-          deleteThisCard={this.deleteCard}
-        />
-      )
-    })
-    console.log(cardList)
-    return cardList;
+
   }
 
   render() {
@@ -54,7 +58,7 @@ class Search extends Component {
     return (
       <section className="movie-search">
         <SearchForm searchCallback={this.movieSearch} />
-        {this.renderMovieList()}
+        {this.state.results}
       </section>
     );
   }
