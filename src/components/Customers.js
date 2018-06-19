@@ -1,56 +1,44 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import {
-  BrowserRouter as Router,
-  Route,
-  Link
-} from 'react-router-dom'
-
-
 
 class Customers extends Component {
+  constructor() {
+    super();
 
-  customers = () => {
-    let customersList = [];
+    this.state = {
+      customersList: [],
+    };
+  }
+
+
+  componentDidMount = () => {
+    console.log('Component did mount was called');
     axios.get(`http://localhost:4000/customers/`)
         .then((response) => {
-          const customersList = response.data.map(inputCard => inputCard.card);
+          console.log(response.data);
+          this.setState({ customersList: response.data });
         })
         .catch((error) => {
-          console.log({ error: error.message});
+          console.log(error);
+          this.setState({ error: error.message });
         });
+  };
 
+  renderCustomersList = () => {
+    return this.state.customersList.map((customerInfo) => <li key={customerInfo.id}>{customerInfo.name}</li>);
   };
 
   render() {
 
-    const home = () => {
-      return (<p>Welcome!</p>);
-    };
-
     return (
-        <Router>
-          <section>
-            <ul>
-              <li><Link to="/">Home</Link></li>
-              {/*<li><Link to="/search">Search</Link></li>*/}
-              {/*<li><Link to="/library">Library</Link></li>*/}
-              {/*<li><Link to="/customers">Customers</Link></li>*/}
-            </ul>
-
-            <hr/>
-
-            <Route exact path="/" component={home}/>
-            {/*<Route path="/search" component={Search}/>*/}
-            {/*<Route path="/library" component={Library}/>*/}
-            {/*<Route path="/customers" component={Customers}/>*/}
-          </section>
-        </Router>
+      <section className="customer-section">
+        <h3>Customers List</h3>
+        <ul>{this.renderCustomersList()}</ul>
+      </section>
     );
   }
 }
 
-export default App;
-
+export default Customers;
 
 
