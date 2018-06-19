@@ -9,6 +9,8 @@ import {
 import './App.css';
 import Search from './components/Search'
 import Customers from "./components/Customers";
+import Rentals from "./components/Rentals";
+import Library from "./components/Library";
 
 
 class App extends Component {
@@ -78,21 +80,24 @@ class App extends Component {
               <StatelessButton handleClick={this.makeNewRental} />
             </span>
             <section>
-              <ul>
-                <li><Link to="/">Home</Link></li>
-                <li><Link to="/search">Search</Link></li>
-                {/*<li><Link to="/library">Library</Link></li>*/}
-                <li><Link to="/customers">Customers</Link></li>
-              </ul>
+            <ul>
+              <li><Link to="/">Home</Link></li>
+              <li><Link to="/search">Search</Link></li>
+              <li><Link to="/library">Library</Link></li>
+              <li><Link to="/customers">Customers</Link></li>
+              <li><Link to="/rentals">Rentals</Link></li>
+            </ul>
 
               <hr/>
 
               <Route exact path="/" component={home}/>
               <Route path="/search" component={Search}/>
-              {/*<Route path="/library" component={Library}/>*/}
+              <Route path="/library" component={Library}/>
+                <Route path="/rentals" component={Rentals}/>
               <Route path="/customers" render={()=><Customers addCustomerToRental={this.addCustomer}/>}/>
             </section>
           </div>
+
         </Router>
     );
   }

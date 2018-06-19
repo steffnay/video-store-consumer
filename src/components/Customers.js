@@ -22,14 +22,16 @@ class Customers extends Component {
   componentDidMount = () => {
     console.log('Component did mount was called');
     axios.get(`http://localhost:3000/customers/`)
-      .then((response) => {
-        console.log(response.data);
-        this.setState({ customersList: response.data });
-      })
-      .catch((error) => {
-        console.log(error);
-        this.setState({ error: error.message });
-      });
+
+        .then((response) => {
+          console.log(response.data);
+          this.setState({ customersList: response.data });
+        })
+        .catch((error) => {
+          console.log(error);
+          this.setState({ error: error.message });
+        });
+
   };
 
   // this is a callback that goes to app to add the customer to the app's state
