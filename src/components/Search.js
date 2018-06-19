@@ -16,33 +16,28 @@ class Search extends Component {
 
     this.state = {
       results: [],
+      message:'',
     };
   }
 
   addMovieToInventory = (movieData) => {
-    console.log('hello')
-    console.log(movieData)
     axios.post('http://localhost:3000/movies', movieData)
      .then((response) => {
-
        console.log(response)
+       this.setState({message: `${response.data.title} added to inventory.`})
      })
      .catch((error) => {
-       this.setState({ error: error.message });
+       console.log(error)
+       this.setState({ message: error.message });
      });
   }
 
   movieSearch = (title) => {
-  console.log('yay');
-  console.log(title);
-
     const BASE_URL = 'http://localhost:3000/movies?query='
-    console.log(`${BASE_URL}${title}`)
+
     axios.get(`${BASE_URL}${title}`)
     .then((response) => {
       console.log('Rendering Movie List')
-
-
         const movieList = response.data.map((result, index) => {
         return (
           <Movie
@@ -56,22 +51,28 @@ class Search extends Component {
           />
         )
       })
-      console.log('setting state');
+
       this.setState({
         results: movieList,
       });
     })
      .catch((error) => {
-       this.setState({ error: error.message });
+       this.setState({ message: error.message });
     });
 
+  }
 
+  showMessage = () => {
+    if (this.state.message) {
+     return (this.state.message)
+   }
   }
 
   render() {
 
     return (
       <section className="movie-search">
+        <p>{this.showMessage()}</p>
         <SearchForm searchCallback={this.movieSearch} />
         {this.state.results}
       </section>
