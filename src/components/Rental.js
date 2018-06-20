@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 
+const RENTAL_URL = 'http://localhost:3000/rentals/';
+
+
 class Rental extends Component {
   constructor(props) {
     super(props);
@@ -17,7 +20,7 @@ class Rental extends Component {
   }
 
   onClickCheckin = () => {
-    axios.post(`http://localhost:3000/rentals/${this.state.title}/return/?customer_id=${this.state.customerId}`)
+    axios.post(`${RENTAL_URL}${this.state.title}/return/?customer_id=${this.state.customerId}`)
           .then((response) => {
             console.log(response);
             this.setState({ returned: true});
