@@ -40,8 +40,9 @@ class Customers extends Component {
   }
 
   renderCustomersList = () => {
-    return this.state.customersList.map((customerInfo) =>
-      <Customer name={customerInfo.name} id={customerInfo.id} customerButtonHandler={this.addCustomerCallback}/>
+    return this.state.customersList.map((customerInfo, index) =>
+      <Customer key={index} name={customerInfo.name} id={customerInfo.id}
+      customerButtonHandler={this.addCustomerCallback}/>
     );
   };
 

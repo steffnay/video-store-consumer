@@ -1,6 +1,18 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
+const LibraryMovie = (props) => {
+  return (
+    <section key={props.key}>
+      <img src={props.img} alt="movie cover" />
+      <h3>{props.title}</h3>
+      <p>Overview: {props.overview}</p>
+      <p>Release Date: {props.release}</p>
+      <button onClick={() => {props.movieButtonHandler(props.title)} }> Add to rental </button>
+    </section>)
+}
+
+
 class Library extends Component {
   constructor() {
     super();
@@ -23,14 +35,17 @@ class Library extends Component {
         });
   };
 
+  addMovieCallback = (title) => {
+    this.props.addMovieToRental(title);
+  }
+
+
   renderLibraryList = () => {
-    return this.state.libraryList.map((libraryMovie) =>
-        <section>
-          <h4>{libraryMovie.title}</h4>
-          <p>Inventory: {libraryMovie.inventory}</p>
-          <p>Release date: {libraryMovie.release_date}</p>
-          <p>Overview: {libraryMovie.overview}</p>
-    </section>);
+    return this.state.libraryList.map((libraryMovie, index) =>
+      <LibraryMovie key={index} title={libraryMovie.title} release={libraryMovie.release_date}
+      overview={libraryMovie.overview} inventory={libraryMovie.inventory} img={libraryMovie.image_url}
+      movieButtonHandler={this.addMovieCallback}/>
+    );
   };
 
 
@@ -46,5 +61,3 @@ class Library extends Component {
 }
 
 export default Library;
-
-

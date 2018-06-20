@@ -19,8 +19,8 @@ class App extends Component {
 
     this.state = {
       rentalCustomerID: 70,
-      rentalCustomerName: 'Minnie Mouse ',
-      rentalMovieTitle: 'psycho',
+      rentalCustomerName: '',
+      rentalMovieTitle: '',
       message:''
     };
   }
@@ -35,20 +35,30 @@ class App extends Component {
 
     axios.post(`http://localhost:3000/rentals/${encodedUri}/check-out?customer_id=${this.state.rentalCustomerID}&due_date=${today}`)
      .then((response) => {
-       console.log(response)
-       console.log('********')
        this.setState({message: `This rental is due: ${response.data.due_date}`})
      })
      .catch((error) => {
        console.log(error)
        this.setState({ message: error.message });
      });
+
+     this.clearRentalForm()
   }
 
-
+  clearRentalForm = () => {
+    this.setState({
+      rentalCustomerID: 70,
+      rentalCustomerName: '',
+      rentalMovieTitle: '',
+    });
+  }
   addCustomer = (id, name) => {
     this.setState({ rentalCustomerID: id });
     this.setState({ rentalCustomerName: name});
+  }
+
+  addMovie = (title) => {
+    this.setState({ rentalMovieTitle: title });
   }
 
   render() {
@@ -58,11 +68,11 @@ class App extends Component {
     };
 
     const StatelessCustomer = (props) => {
-      return <h3>Customer: {props.name}</h3>;
+      return <h4>Customer: {props.name}</h4>;
     }
 
     const StatelessMovie = (props) => {
-      return <h3>Movie: {props.title}</h3>;
+      return <h4>Movie: {props.title}</h4>;
     }
 
     const StatelessButton = (props) => {
@@ -75,6 +85,7 @@ class App extends Component {
             <img src={'https://preview.ibb.co/n6pjXy/blockbusted.png'} alt="blockbusted logo"/>
             {this.state.message}
             <span>
+              <p>New Rental</p>
               <StatelessCustomer name={this.state.rentalCustomerName} />
               <StatelessMovie title={this.state.rentalMovieTitle} />
               <StatelessButton handleClick={this.makeNewRental} />
@@ -92,8 +103,8 @@ class App extends Component {
 
               <Route exact path="/" component={home}/>
               <Route path="/search" component={Search}/>
-              <Route path="/library" component={Library}/>
-                <Route path="/rentals" component={Rentals}/>
+              <Route path="/library" render={()=><Library addMovieToRental={this.addMovie}/>}/>
+              <Route path="/rentals" component={Rentals}/>
               <Route path="/customers" render={()=><Customers addCustomerToRental={this.addCustomer}/>}/>
             </section>
           </div>
