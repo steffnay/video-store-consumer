@@ -31,8 +31,8 @@ class App extends Component {
 
     this.state = {
       rentalCustomerID: 70,
-      rentalCustomerName: '',
-      rentalMovieTitle: '',
+      rentalCustomerName: 'None Selected',
+      rentalMovieTitle: 'None Selected',
       message:''
     };
   }
@@ -60,8 +60,8 @@ class App extends Component {
   clearRentalForm = () => {
     this.setState({
       rentalCustomerID: 70,
-      rentalCustomerName: '',
-      rentalMovieTitle: '',
+      rentalCustomerName: 'None Selected',
+      rentalMovieTitle: 'None Selected',
     });
   }
   addCustomer = (id, name) => {
@@ -76,15 +76,15 @@ class App extends Component {
   render() {
 
     const home = () => {
-      return (<p>Welcome!</p>);
+      return <p></p>;
     };
 
     const StatelessCustomer = (props) => {
-      return <span>Customer: {props.name}</span>;
+      return <span><strong>Customer:</strong> {props.name}  </span>;
     }
 
     const StatelessMovie = (props) => {
-      return <span>Movie: {props.title}</span>;
+      return <span><strong>Movie:</strong> {props.title}  </span>;
     }
 
     const StatelessButton = (props) => {
@@ -102,14 +102,15 @@ class App extends Component {
            <Toolbar>
 
              <section>
-               <LinkToButton toLink='/' buttonText='Home'/>
+               <LinkToButton toLink='/' buttonText='Home'className="ok"/>
                <LinkToButton toLink='/search' buttonText='Search'/>
                <LinkToButton toLink='/library' buttonText='Library'/>
                <LinkToButton toLink='/customers' buttonText='Customers'/>
                <LinkToButton toLink='/rentals' buttonText='Rentals'/>
               </section>
+              
+
               <section>
-                <span><strong>New Rental:</strong></span>
                 <StatelessCustomer name={this.state.rentalCustomerName} />
                 <StatelessMovie title={this.state.rentalMovieTitle} />
                 <StatelessButton handleClick={this.makeNewRental} />
