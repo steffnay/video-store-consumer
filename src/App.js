@@ -1,4 +1,10 @@
 import React, { Component } from 'react';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import PropTypes from 'prop-types';
+
+import Grid from '@material-ui/core/Grid';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
 import axios from 'axios';
 import {
     BrowserRouter as Router,
@@ -11,6 +17,14 @@ import Search from './components/Search'
 import Customers from "./components/Customers";
 import Rentals from "./components/Rentals";
 import Library from "./components/Library";
+import ListItem from "@material-ui/core/es/ListItem/ListItem";
+import ListItemIcon from "@material-ui/core/es/ListItemIcon/ListItemIcon";
+import ListItemText from "@material-ui/core/es/ListItemText/ListItemText";
+import Divider from "@material-ui/core/es/Divider/Divider";
+import List from "@material-ui/core/es/List/List";
+import Button from "@material-ui/core/es/Button/Button";
+import LinkToButton from "./components/LinkToButton";
+
 
 
 class App extends Component {
@@ -79,7 +93,10 @@ class App extends Component {
       return <button onClick={props.handleClick}> Make Rental</button>
     }
 
+
     return (
+        <React.Fragment>
+          <CssBaseline />
         <Router>
           <div>
             <img src={'https://preview.ibb.co/n6pjXy/blockbusted.png'} alt="blockbusted logo"/>
@@ -91,25 +108,43 @@ class App extends Component {
               <StatelessButton handleClick={this.makeNewRental} />
             </span>
             <section>
-            <ul>
-              <li><Link to="/">Home</Link></li>
-              <li><Link to="/search">Search</Link></li>
-              <li><Link to="/library">Library</Link></li>
-              <li><Link to="/customers">Customers</Link></li>
-              <li><Link to="/rentals">Rentals</Link></li>
-            </ul>
+
+              {/*<Button component={(props) => <Link to="/" {...props} />}>Home</Button>*/}
+              <LinkToButton toLink='/' buttonText='Home'/>
+              <LinkToButton toLink='/search' buttonText='Search'/>
+              <LinkToButton toLink='/library' buttonText='Library'/>
+              <LinkToButton toLink='/customers' buttonText='Customers'/>
+              <LinkToButton toLink='/rentals' buttonText='Rentals'/>
+
+
+
+
+              {/*<ul>*/}
+                {/*<li><Link to="/search">Search</Link></li>*/}
+                {/*<li><Link to="/library">Library</Link></li>*/}
+                {/*<li><Link to="/customers">Customers</Link></li>*/}
+                {/*<li><Link to="/rentals">Rentals</Link></li>*/}
+              {/*</ul>*/}
 
               <hr/>
 
-              <Route exact path="/" component={home}/>
-              <Route path="/search" component={Search}/>
-              <Route path="/library" render={()=><Library addMovieToRental={this.addMovie}/>}/>
-              <Route path="/rentals" component={Rentals}/>
-              <Route path="/customers" render={()=><Customers addCustomerToRental={this.addCustomer}/>}/>
+                    <Route exact path="/" component={home}/>
+                    <Route path="/search" component={Search}/>
+                    <Route path="/library" render={()=><Library addMovieToRental={this.addMovie}/>}/>
+                    <Route path="/rentals" component={Rentals}/>
+                    <Route path="/customers" render={()=><Customers addCustomerToRental={this.addCustomer}/>}/>
+              {/*<section className='body-section'>*/}
+
+              {/*<Grid container spacing={8}>*/}
+                  {/*<Grid item xs>*/}
+                  {/*</Grid>*/}
+                {/*</Grid>*/}
+              {/*</section>*/}
             </section>
           </div>
 
         </Router>
+        </React.Fragment>
     );
   }
 }

@@ -30,14 +30,14 @@ class Search extends Component {
        console.log(error)
        this.setState({ message: error.message });
      });
-  }
+  };
 
   movieSearch = (title) => {
-    const BASE_URL = 'http://localhost:3000/movies?query='
+    const BASE_URL = 'http://localhost:3000/movies?query=';
 
     axios.get(`${BASE_URL}${title}`)
     .then((response) => {
-      console.log('Rendering Movie List')
+      console.log('Rendering Movie List');
         const movieList = response.data.map((result, index) => {
         return (
           <Movie
@@ -50,7 +50,7 @@ class Search extends Component {
             addMovieCallback={this.addMovieToInventory}
           />
         )
-      })
+      });
 
       this.setState({
         results: movieList,
@@ -60,13 +60,13 @@ class Search extends Component {
        this.setState({ message: error.message });
     });
 
-  }
+  };
 
   showMessage = () => {
     if (this.state.message) {
      return (this.state.message)
    }
-  }
+  };
 
   render() {
 

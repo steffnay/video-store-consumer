@@ -25,20 +25,20 @@ class SearchForm extends Component {
     updateState[fieldName] = fieldValue;
     this.setState(updateState);
     console.log(this.state.text)
-  }
+  };
 
   onFormSubmit = (event) => {
     event.preventDefault();
 
     this.props.searchCallback(this.state.text);
     this.clearForm();
-  }
+  };
 
   clearForm = () => {
     this.setState({
       text: '',
     });
-  }
+  };
 
 
   render() {

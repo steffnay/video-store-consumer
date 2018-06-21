@@ -10,7 +10,7 @@ const LibraryMovie = (props) => {
       <p>Release Date: {props.release}</p>
       <button onClick={() => {props.movieButtonHandler(props.title)} }> Add to rental </button>
     </section>)
-}
+};
 
 
 class Library extends Component {
@@ -37,7 +37,7 @@ class Library extends Component {
 
   addMovieCallback = (title) => {
     this.props.addMovieToRental(title);
-  }
+  };
 
 
   renderLibraryList = () => {
