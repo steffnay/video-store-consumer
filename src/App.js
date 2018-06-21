@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import PropTypes from 'prop-types';
+import Paper from '@material-ui/core/Paper';
+
 
 import Grid from '@material-ui/core/Grid';
 import Tabs from '@material-ui/core/Tabs';
@@ -127,19 +129,21 @@ class App extends Component {
               {/*</ul>*/}
 
               <hr/>
+              <section className='body-section'>
+
+                <Grid container justify="center"  spacing={8}>
+                  <Grid item xs={9}>
+                    <Paper>
 
                     <Route exact path="/" component={home}/>
                     <Route path="/search" component={Search}/>
                     <Route path="/library" render={()=><Library addMovieToRental={this.addMovie}/>}/>
                     <Route path="/rentals" component={Rentals}/>
                     <Route path="/customers" render={()=><Customers addCustomerToRental={this.addCustomer}/>}/>
-              {/*<section className='body-section'>*/}
-
-              {/*<Grid container spacing={8}>*/}
-                  {/*<Grid item xs>*/}
-                  {/*</Grid>*/}
-                {/*</Grid>*/}
-              {/*</section>*/}
+                    </Paper>
+                  </Grid>
+                </Grid>
+              </section>
             </section>
           </div>
 

@@ -18,7 +18,7 @@ class LinkToButton extends Component {
     const { toLink, buttonText } = this.props;
     return (
       // const LinkToButton = ({ text, toLink }) => (
-      <Button component={this.renderLink}>
+      <Button variant="contained" color="primary" component={this.renderLink}>
         {buttonText}
       </Button>
   );
