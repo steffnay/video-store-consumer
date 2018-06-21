@@ -33,6 +33,8 @@ class Library extends Component {
           console.log(error);
           this.setState({ error: error.message });
         });
+
+    console.log(this.state.libraryList)
   };
 
   addMovieCallback = (title) => {
