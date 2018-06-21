@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import PropTypes from 'prop-types';
 
 import {
@@ -7,7 +6,6 @@ import {
   Route,
   Link
 } from 'react-router-dom'
-import Library from "./Library";
 import Button from "@material-ui/core/es/Button/Button";
 
 
@@ -17,7 +15,6 @@ class LinkToButton extends Component {
   render() {
     const { toLink, buttonText } = this.props;
     return (
-      // const LinkToButton = ({ text, toLink }) => (
       <Button variant="contained" color="primary" component={this.renderLink}>
         {buttonText}
       </Button>

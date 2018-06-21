@@ -13,6 +13,7 @@ import CardContent from "@material-ui/core/es/CardContent/CardContent";
 import Typography from "@material-ui/core/es/Typography/Typography";
 import Grid from "@material-ui/core/es/Grid/Grid";
 import CardMedia from "@material-ui/core/es/CardMedia/CardMedia";
+import Paper from "@material-ui/core/es/Paper/Paper";
 
 
 
@@ -31,25 +32,28 @@ class Movie extends Component {
   render() {
     return (
         <Grid item xs={12}>
-          <div>
+          {/*<Paper className="outer-paper">*/}
             <Card className="foo"
-                  style={{ display: 'inline-flex' }}>
+                  >
               <section className="details">
                 <CardContent className="content">
 
                   <Typography variant="headline">{this.props.title}</Typography>
-                  <Typography variant="subheading" color="textSecondary">
-                      <p>Overview: {this.props.overview}</p>
-                      <p>Release Date:{this.props.releaseDate}</p>
+                  <Typography variant="subheading"
+                              color="textSecondary"
+                              className="big-text">
+                    <p>Overview: {this.props.overview}</p>
+                    <p>Release Date:{this.props.releaseDate}</p>
                   </Typography>
-                </CardContent>
-                <div className="controls">
-                  <button onClick={this.handleClick}>Add to Inventory</button>
-                  {/*<IconButton aria-label="Play/pause">*/}
-                  {/*<PlayArrowIcon className={classes.playIcon} />*/}
-                  {/*</IconButton>*/}
+                  <div className="controls">
+                    <button onClick={this.handleClick}>Add to Inventory</button>
+                    {/*<IconButton aria-label="Play/pause">*/}
+                    {/*<PlayArrowIcon className={classes.playIcon} />*/}
+                    {/*</IconButton>*/}
 
-                </div>
+                  </div>
+                </CardContent>
+
 
               {/*<h3>{this.props.title}</h3>*/}
                   {/*<p><img src={this.props.imageUrl} alt="movie cover"/></p>*/}
@@ -67,7 +71,7 @@ class Movie extends Component {
               </CardMedia>
 
             </Card>
-          </div>
+          {/*</Paper>*/}
         </Grid>
     );
   }
