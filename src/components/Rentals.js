@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
-
+import Paper from "@material-ui/core/es/Paper/Paper";
 import Rental from "./Rental";
 
 
@@ -31,11 +33,21 @@ class Rentals extends Component {
   //   this.setState({ [name]: event.target.checked });
   // };
 
-  getUrl = () => { return this.state.checkedB ? `${RENTAL_URL}overdue/` : RENTAL_URL };
+  getOverdueUrl = () => { return this.state.checkedB ? `${RENTAL_URL}overdue/` : RENTAL_URL };
 
-  callApi = () => {
+  callApiAll = () => {
     console.log('Rental API called');
-    axios.get(this.getUrl())
+    axios.get(RENTAL_URL)
+        .then((response) => this.setState({ rentalsList: response.data }))
+        .catch((error) => {
+          console.log(error);
+          this.setState({ error: error.message });
+        });
+  };
+
+  callAPIOverdue = () => {
+    console.log('Rental API called for overdue only');
+    axios.get(`${RENTAL_URL}overdue/`)
         .then((response) => this.setState({ rentalsList: response.data }))
         .catch((error) => {
           console.log(error);
@@ -44,15 +56,21 @@ class Rentals extends Component {
   };
 
 
+
   handleChange = name => event => {
-    console.log(this.state.checkedB);
-    this.setState({ [name]: event.target.checked });
-    this.callApi();
+    console.log(this.state.checkedA);
+    this.setState({ [name]: !event.target.checked });
+    if (this.state.checkedA === true) {
+      this.callAPIOverdue();
+    }
+    else {
+      this.callApiAll();
+    }
 
   };
 
   componentDidMount = () => {
-    this.callApi();
+    this.callApiAll();
     // console.log('Component did mount was called');
     // axios.get(this.getUrl())
     //     .then((response) => {
@@ -69,8 +87,8 @@ class Rentals extends Component {
 
     // const filterButton = <button onClick={() => this.switchFilter()}>{this.state.onlyOverdue.toString()}</button>;
 
-    const renderRentalsList = () => { return this.state.rentalsList.map((rentalInfo) =>
-        <article>
+    const renderRentalsList = () => { return this.state.rentalsList.map((rentalInfo, index) =>
+        <article key={index}>
           <Rental key={rentalInfo.id}
                   title={rentalInfo.title}
                   customerId={rentalInfo.customer_id}
@@ -84,17 +102,26 @@ class Rentals extends Component {
 
     return (
         <section className="rentals-section">
-          <h3>Rentals List</h3>
-          <Switch
-              checked={this.state.checkedB}
-              onChange={this.handleChange('checkedB')}
-              value="checkedB"
-              color="primary"
-              // checked={this.state.onlyOverdue}
-              // onChange={this.switchFilter}
-              // value={false}
-          />
-          {renderRentalsList()}
+          <Paper>
+            <h3>Rentals List</h3>
+            <FormGroup row>
+              <FormControlLabel
+                control={
+                  <Switch
+                  checked={this.state.checkedA}
+                  onChange={this.handleChange('checkedA')}
+                  value="checkedB"
+                  color="primary"
+                  // checked={this.state.onlyOverdue}
+                  // onChange={this.switchFilter}
+                  // value={false}
+                  />
+                }
+                label="Only Overdue"
+              />
+            </FormGroup>
+            {renderRentalsList()}
+          </Paper>
         </section>
     );
   }

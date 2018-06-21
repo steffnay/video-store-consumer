@@ -18,6 +18,11 @@ import Library from "./components/Library";
 
 import LinkToButton from "./components/LinkToButton";
 
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+
+
 
 
 class App extends Component {
@@ -75,15 +80,15 @@ class App extends Component {
     };
 
     const StatelessCustomer = (props) => {
-      return <h4>Customer: {props.name}</h4>;
+      return <span>Customer: {props.name}</span>;
     }
 
     const StatelessMovie = (props) => {
-      return <h4>Movie: {props.title}</h4>;
+      return <span>Movie: {props.title}</span>;
     }
 
     const StatelessButton = (props) => {
-      return <button onClick={props.handleClick}> Make Rental</button>
+      return <span><button onClick={props.handleClick}> Make Rental</button></span>;
     }
 
 
@@ -91,40 +96,44 @@ class App extends Component {
         <React.Fragment>
           <CssBaseline />
         <Router>
+          <section className='body-section background'>
           <div>
-            <img src={'https://preview.ibb.co/n6pjXy/blockbusted.png'} alt="blockbusted logo"/>
-            {this.state.message}
-            <span>
-              <p>New Rental</p>
-              <StatelessCustomer name={this.state.rentalCustomerName} />
-              <StatelessMovie title={this.state.rentalMovieTitle} />
-              <StatelessButton handleClick={this.makeNewRental} />
-            </span>
-            <section>
+          <AppBar position="static" color="default">
+           <Toolbar>
 
-              <LinkToButton toLink='/' buttonText='Home'/>
-              <LinkToButton toLink='/search' buttonText='Search'/>
-              <LinkToButton toLink='/library' buttonText='Library'/>
-              <LinkToButton toLink='/customers' buttonText='Customers'/>
-              <LinkToButton toLink='/rentals' buttonText='Rentals'/>
-
-              <hr/>
-              <section className='body-section background'>
-
-                <Grid container justify="center" spacing={8}>
-                  <Grid item xs={9}>
-
-                    <Route exact path="/" component={home}/>
-                    <Route path="/search" component={Search}/>
-                    <Route path="/library" render={()=><Library addMovieToRental={this.addMovie}/>}/>
-                    <Route path="/rentals" component={Rentals}/>
-                    <Route path="/customers" render={()=><Customers addCustomerToRental={this.addCustomer}/>}/>
-                  </Grid>
-                </Grid>
+             <section>
+               <LinkToButton toLink='/' buttonText='Home'/>
+               <LinkToButton toLink='/search' buttonText='Search'/>
+               <LinkToButton toLink='/library' buttonText='Library'/>
+               <LinkToButton toLink='/customers' buttonText='Customers'/>
+               <LinkToButton toLink='/rentals' buttonText='Rentals'/>
               </section>
+              <section>
+                <span><strong>New Rental:</strong></span>
+                <StatelessCustomer name={this.state.rentalCustomerName} />
+                <StatelessMovie title={this.state.rentalMovieTitle} />
+                <StatelessButton handleClick={this.makeNewRental} />
+              </section>
+           </Toolbar>
+          </AppBar>
+
+          <center><img src={'https://preview.ibb.co/n6pjXy/blockbusted.png'} alt="blockbusted logo"/></center>
+            {this.state.message}
+
+            <section>
+              <Grid container justify="center" spacing={8}>
+                <Grid item xs={9}>
+
+                  <Route exact path="/" component={home}/>
+                  <Route path="/search" component={Search}/>
+                  <Route path="/library" render={()=><Library addMovieToRental={this.addMovie}/>}/>
+                  <Route path="/rentals" component={Rentals}/>
+                  <Route path="/customers" render={()=><Customers addCustomerToRental={this.addCustomer}/>}/>
+                </Grid>
+              </Grid>
             </section>
           </div>
-
+        </section>
         </Router>
         </React.Fragment>
     );
