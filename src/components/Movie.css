@@ -1,0 +1,15 @@
+Card {
+    display: inline-flex;
+}
+.details {
+    display: flex;
+    flex-direction: row;
+}
+.content {
+    flex: 1 0 auto;
+}
+
+/*.cover {*/
+    /*width: 151px;*/
+    /*height: 151px;*/
+/*}*/

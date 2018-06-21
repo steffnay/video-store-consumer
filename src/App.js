@@ -129,18 +129,18 @@ class App extends Component {
               {/*</ul>*/}
 
               <hr/>
-              <section className='body-section'>
+              <section className='body-section background'>
 
-                <Grid container justify="center"  spacing={8}>
+                <Grid container justify="center" spacing={8}>
                   <Grid item xs={9}>
-                    <Paper>
+                    {/*<Paper>*/}
 
                     <Route exact path="/" component={home}/>
                     <Route path="/search" component={Search}/>
                     <Route path="/library" render={()=><Library addMovieToRental={this.addMovie}/>}/>
                     <Route path="/rentals" component={Rentals}/>
                     <Route path="/customers" render={()=><Customers addCustomerToRental={this.addCustomer}/>}/>
-                    </Paper>
+                    {/*</Paper>*/}
                   </Grid>
                 </Grid>
               </section>

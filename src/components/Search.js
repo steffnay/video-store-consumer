@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import './Search.css';
+
 import SearchForm from './SearchForm'
 import Movie from './Movie'
 import axios from 'axios';
@@ -8,6 +10,8 @@ import {
   Route,
   Link
 } from 'react-router-dom'
+import Grid from "@material-ui/core/es/Grid/Grid";
+import Paper from "@material-ui/core/es/Paper/Paper";
 
 
 class Search extends Component {
@@ -73,8 +77,13 @@ class Search extends Component {
     return (
       <section className="movie-search">
         <p>{this.showMessage()}</p>
+        <Paper>
         <SearchForm searchCallback={this.movieSearch} />
+        </Paper>
+        <Grid container justify="center" spacing={8}>
+
         {this.state.results}
+        </Grid>
       </section>
     );
   }

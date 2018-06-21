@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import Paper from "@material-ui/core/es/Paper/Paper";
 
 const LibraryMovie = (props) => {
   return (
@@ -53,8 +54,10 @@ class Library extends Component {
 
     return (
         <section className="library-section">
+          <Paper>
           <h3>Library List</h3>
           <ul>{this.renderLibraryList()}</ul>
+          </Paper>
         </section>
     );
   }
