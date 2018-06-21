@@ -37,3 +37,12 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.flex {
+  flex: 1;
+}
+
+.menuButton: {
+  marginLeft: -12;
+  marginRight: 20;
+}

@@ -7,6 +7,7 @@ import Paper from "@material-ui/core/es/Paper/Paper";
 import Rental from "./Rental";
 
 
+
 const RENTAL_URL = 'http://localhost:3000/rentals/';
 
 class Rentals extends Component {

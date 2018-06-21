@@ -21,7 +21,8 @@ import LinkToButton from "./components/LinkToButton";
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-
+import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
 
 
 
@@ -30,7 +31,7 @@ class App extends Component {
     super();
 
     this.state = {
-      rentalCustomerID: 70,
+
       rentalCustomerName: 'None Selected',
       rentalMovieTitle: 'None Selected',
       message:''
@@ -59,7 +60,7 @@ class App extends Component {
 
   clearRentalForm = () => {
     this.setState({
-      rentalCustomerID: 70,
+      rentalCustomerID: '',
       rentalCustomerName: 'None Selected',
       rentalMovieTitle: 'None Selected',
     });
@@ -88,7 +89,7 @@ class App extends Component {
     }
 
     const StatelessButton = (props) => {
-      return <span><button onClick={props.handleClick}> Make Rental</button></span>;
+      return <Button color="inherit" onClick={props.handleClick}> Create Rental </Button>
     }
 
 
@@ -100,7 +101,6 @@ class App extends Component {
           <div>
           <AppBar position="static" color="default">
            <Toolbar>
-
              <section>
                <LinkToButton toLink='/' buttonText='Home'className="ok"/>
                <LinkToButton toLink='/search' buttonText='Search'/>
@@ -108,18 +108,22 @@ class App extends Component {
                <LinkToButton toLink='/customers' buttonText='Customers'/>
                <LinkToButton toLink='/rentals' buttonText='Rentals'/>
               </section>
-              
-
-              <section>
+              <IconButton className="menuButton" color="inherit" aria-label="Menu">
+              </IconButton>
+              <Typography variant="title" color="inherit" className="flex">
+              </Typography>
+              <section >
                 <StatelessCustomer name={this.state.rentalCustomerName} />
                 <StatelessMovie title={this.state.rentalMovieTitle} />
                 <StatelessButton handleClick={this.makeNewRental} />
               </section>
+
+              <p>{this.state.message}</p>
            </Toolbar>
           </AppBar>
 
+
           <center><img src={'https://preview.ibb.co/n6pjXy/blockbusted.png'} alt="blockbusted logo"/></center>
-            {this.state.message}
 
             <section>
               <Grid container justify="center" spacing={8}>
