@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
+import Button from '@material-ui/core/Button';
 
 const RENTAL_URL = 'http://localhost:3000/rentals/';
 
@@ -33,12 +34,13 @@ class Rental extends Component {
 
   render() {
     const status = this.state.returned ? "Returned" : "Checked-Out";
-    const checkinButton = <button onClick={() => this.onClickCheckin()}>Return rental</button>;
+    const checkinButton = <Button variant="raised" color="primary" onClick={() => this.onClickCheckin()}>Return rental</Button>;
     return (
         <section className="one-rental-section">
           <h4>{this.state.title}</h4>
           <p>Checked-out by: {this.state.name}</p>
           <p>Status: {status}</p>
+
           {checkinButton}
         </section>
     );

@@ -1,11 +1,4 @@
 import React, { Component } from 'react';
-import axios from 'axios';
-import {
-  BrowserRouter as Router,
-  Route,
-  Link
-} from 'react-router-dom'
-
 
 class SearchForm extends Component {
   constructor() {
@@ -25,20 +18,20 @@ class SearchForm extends Component {
     updateState[fieldName] = fieldValue;
     this.setState(updateState);
     console.log(this.state.text)
-  }
+  };
 
   onFormSubmit = (event) => {
     event.preventDefault();
 
     this.props.searchCallback(this.state.text);
     this.clearForm();
-  }
+  };
 
   clearForm = () => {
     this.setState({
       text: '',
     });
-  }
+  };
 
 
   render() {

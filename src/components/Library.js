@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import Paper from "@material-ui/core/es/Paper/Paper";
 
 const LibraryMovie = (props) => {
   return (
@@ -10,7 +11,7 @@ const LibraryMovie = (props) => {
       <p>Release Date: {props.release}</p>
       <button onClick={() => {props.movieButtonHandler(props.title)} }> Add to rental </button>
     </section>)
-}
+};
 
 
 class Library extends Component {
@@ -39,7 +40,7 @@ class Library extends Component {
 
   addMovieCallback = (title) => {
     this.props.addMovieToRental(title);
-  }
+  };
 
 
   renderLibraryList = () => {
@@ -55,8 +56,10 @@ class Library extends Component {
 
     return (
         <section className="library-section">
+          <Paper>
           <h3>Library List</h3>
           <ul>{this.renderLibraryList()}</ul>
+          </Paper>
         </section>
     );
   }
