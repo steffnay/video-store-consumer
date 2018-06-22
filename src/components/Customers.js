@@ -10,7 +10,12 @@ import Paper from '@material-ui/core/Paper';
 
 // this is a stateless component for customer
 const Customer = (props) => {
-  const addButton = <Button variant="raised" color="primary" onClick={() => props.customerButtonHandler(props.id, props.name)}>Add to Rental</Button>;
+  const addButton =
+    <Button variant="raised"
+            color="primary"
+            onClick={() => props.customerButtonHandler(props.id, props.name)}>
+    Add to Rental
+    </Button>;
 
   return (
     <Grid item xs={12}>
