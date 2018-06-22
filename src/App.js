@@ -82,7 +82,7 @@ class App extends Component {
     };
 
     const StatelessCustomer = (props) => {
-      return <span><strong>Customer:</strong> {props.name}</span>;
+      return <span><strong>Customer:</strong> {props.name} </span>;
     };
 
     const StatelessMovie = (props) => {
@@ -107,7 +107,6 @@ class App extends Component {
                <LinkToButton toLink='/' buttonText='Home' className="ok"/>
                <LinkToButton toLink='/search' buttonText='Search'/>
                <LinkToButton toLink='/library' buttonText='Library'/>
-               <LinkToButton toLink='/customers' buttonText='Customers'/>
                <LinkToButton toLink='/rentals' buttonText='Rentals'/>
               </section>
               <IconButton className="menuButton" color="inherit" aria-label="Menu" />
