@@ -18,23 +18,29 @@ import Library from "./components/Library";
 
 import LinkToButton from "./components/LinkToButton";
 
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+
 
 
 class App extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
-      rentalCustomerID: 70,
-      rentalCustomerName: '',
-      rentalMovieTitle: '',
+
+      rentalCustomerName: 'None Selected',
+      rentalMovieTitle: 'None Selected',
       message:''
     };
   }
 
   // axios call for creating rental when button is clicked
   makeNewRental = () => {
-    const encodedUri = encodeURI(this.state.rentalMovieTitle)
+    const encodedUri = encodeURI(this.state.rentalMovieTitle);
 
     let dt = new Date();
     dt.setDate(dt.getDate() + 7);
@@ -54,78 +60,88 @@ class App extends Component {
 
   clearRentalForm = () => {
     this.setState({
-      rentalCustomerID: 70,
-      rentalCustomerName: '',
-      rentalMovieTitle: '',
+      rentalCustomerID: '',
+      rentalCustomerName: 'None Selected',
+      rentalMovieTitle: 'None Selected',
     });
-  }
+  };
   addCustomer = (id, name) => {
+    console.log(name);
     this.setState({ rentalCustomerID: id });
     this.setState({ rentalCustomerName: name});
-  }
+  };
 
   addMovie = (title) => {
     this.setState({ rentalMovieTitle: title });
-  }
+  };
 
   render() {
 
     const home = () => {
-      return (<p>Welcome!</p>);
+      return <p></p>;
     };
 
     const StatelessCustomer = (props) => {
-      return <h4>Customer: {props.name}</h4>;
-    }
+      return <span><strong>Customer:</strong> {props.name}</span>;
+    };
 
     const StatelessMovie = (props) => {
-      return <h4>Movie: {props.title}</h4>;
-    }
+      return <span><strong>Movie:</strong> {props.title} </span>;
+    };
 
     const StatelessButton = (props) => {
-      return <button onClick={props.handleClick}> Make Rental</button>
-    }
+      return <Button color="inherit" onClick={props.handleClick}> Create Rental </Button>
+    };
 
 
     return (
         <React.Fragment>
           <CssBaseline />
-          <Router>
-            <div>
-              <img src={'https://preview.ibb.co/n6pjXy/blockbusted.png'} alt="blockbusted logo"/>
-              {this.state.message}
-              <span>
-                <p>New Rental</p>
+        <Router>
+          <section className='body-section background'>
+          <div>
+            {/*do we want this as position="fixed" ?) */}
+          <AppBar position="static" color="default">
+           <Toolbar>
+             <section>
+               <LinkToButton toLink='/' buttonText='Home' className="ok"/>
+               <LinkToButton toLink='/search' buttonText='Search'/>
+               <LinkToButton toLink='/library' buttonText='Library'/>
+               <LinkToButton toLink='/customers' buttonText='Customers'/>
+               <LinkToButton toLink='/rentals' buttonText='Rentals'/>
+              </section>
+              <IconButton className="menuButton" color="inherit" aria-label="Menu" />
+              {/*</IconButton>*/}
+              <Typography variant="title" color="inherit" className="flex">
+              </Typography>
+              <section >
                 <StatelessCustomer name={this.state.rentalCustomerName} />
                 <StatelessMovie title={this.state.rentalMovieTitle} />
                 <StatelessButton handleClick={this.makeNewRental} />
-              </span>
-              <section>
-
-                <LinkToButton toLink='/' buttonText='Home'/>
-                <LinkToButton toLink='/search' buttonText='Search'/>
-                <LinkToButton toLink='/library' buttonText='Library'/>
-                <LinkToButton toLink='/customers' buttonText='Customers'/>
-                <LinkToButton toLink='/rentals' buttonText='Rentals'/>
-
-                <hr/>
-                <section className='body-section background'>
-
-                  <Grid container justify="center" spacing={8}>
-                    <Grid item xs={9}>
-
-                      <Route exact path="/" component={home}/>
-                      <Route path="/search" component={Search}/>
-                      <Route path="/library" render={()=><Library addMovieToRental={this.addMovie}/>}/>
-                      <Route path="/rentals" component={Rentals}/>
-                      <Route path="/customers" render={()=><Customers addCustomerToRental={this.addCustomer}/>}/>
-                    </Grid>
-                  </Grid>
-                </section>
               </section>
-            </div>
 
-          </Router>
+              <p>{this.state.message}</p>
+           </Toolbar>
+          </AppBar>
+
+
+          <center><img src={'https://preview.ibb.co/n6pjXy/blockbusted.png'} alt="blockbusted logo"/></center>
+
+            <section>
+              <Grid container justify="center" spacing={8}>
+                <Grid item xs={9}>
+
+                  <Route exact path="/" component={home}/>
+                  <Route path="/search" component={Search}/>
+                  <Route path="/library" render={()=><Library addMovieToRental={this.addMovie}/>}/>
+                  <Route path="/rentals" component={Rentals}/>
+                  <Route path="/customers" render={()=><Customers addCustomerToRental={this.addCustomer}/>}/>
+                </Grid>
+              </Grid>
+            </section>
+          </div>
+        </section>
+        </Router>
         </React.Fragment>
     );
   }

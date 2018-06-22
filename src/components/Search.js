@@ -1,22 +1,19 @@
 import React, { Component } from 'react';
-import './Search.css';
-
 import SearchForm from './SearchForm'
 import Movie from './Movie'
 import axios from 'axios';
-import {
-  BrowserRouter as Router,
-  Route,
-  Link
-} from 'react-router-dom'
-import Grid from "@material-ui/core/es/Grid/Grid";
-import Paper from "@material-ui/core/es/Paper/Paper";
+
+
+
 import Notification from "./Notification";
 
 
+import Paper from '@material-ui/core/Paper';
+
+
 class Search extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       results: [],
@@ -32,7 +29,7 @@ class Search extends Component {
        // showMessage(this.state.message);
      })
      .catch((error) => {
-       console.log(error)
+       console.log(error);
        this.setState({ message: error.message });
      });
   };
@@ -56,7 +53,6 @@ class Search extends Component {
           />
         )
       });
-
       this.setState({
         results: movieList,
       });
@@ -64,11 +60,9 @@ class Search extends Component {
      .catch((error) => {
        this.setState({ message: error.message });
     });
-    // .then((response) => {
-    //   this.showMessage("foo")
-    // });
 
   };
+
 
   // showMessage = (message) => {
   //   console.log("shit is fucked");
@@ -79,6 +73,13 @@ class Search extends Component {
   //   //  return thisMessage;
   //  // }
   // };
+
+  showMessage = () => {
+    if (this.state.message) {
+     return (this.state.message)
+   }
+  }
+
 
   render() {
 
@@ -108,12 +109,9 @@ class Search extends Component {
         {showMessage(this.state.message)}
         {/*{<Notification notificationMessage={this.state.message} />}*/}
         <Paper>
-        <SearchForm searchCallback={this.movieSearch} />
+          <SearchForm searchCallback={this.movieSearch} />
         </Paper>
-        <Grid container justify="center" spacing={8}>
-
         {this.state.results}
-        </Grid>
       </section>
     );
   }

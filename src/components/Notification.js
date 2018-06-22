@@ -1,14 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import {
-  BrowserRouter as Router,
-  Route,
-  Link
-} from 'react-router-dom'
 
-import Button from "@material-ui/core/es/Button/Button";
-import Grid from "@material-ui/core/es/Grid/Grid";
 import Snackbar from "@material-ui/core/es/Snackbar/Snackbar";
 
 // const styles = theme => ({
@@ -93,7 +86,7 @@ class Notification extends Component {
               ContentProps={{
                 'aria-describedby': 'message-id',
               }}
-              message={<span id="message-id">{this.props.notificationMessage}</span>}
+              message={<span id="message-id">{this.props.message}</span>}
               />
 
         </section>

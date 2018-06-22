@@ -14,7 +14,7 @@ import Typography from "@material-ui/core/es/Typography/Typography";
 import Grid from "@material-ui/core/es/Grid/Grid";
 import CardMedia from "@material-ui/core/es/CardMedia/CardMedia";
 import Paper from "@material-ui/core/es/Paper/Paper";
-
+import Button from '@material-ui/core/Button';
 
 
 class Movie extends Component {
@@ -30,11 +30,13 @@ class Movie extends Component {
   };
 
   render() {
+
+    const addButton = <Button variant="raised" color="primary" onClick={() => this.handleClick()}>Add to Inventory</Button>;
+const foo = this.props.imageUrl;
     return (
         <Grid item xs={12}>
           {/*<Paper className="outer-paper">*/}
-            <Card className="foo"
-                  >
+            <Card className="foo" >
               <section className="details">
                 <CardContent className="content">
 
@@ -46,18 +48,23 @@ class Movie extends Component {
                     <p>Release Date:{this.props.releaseDate}</p>
                   </Typography>
                   <div className="controls">
+{/*<<<<<<< HEAD*/}
                     <button onClick={this.handleClick}>Add to Inventory</button>
 
+{/*=======*/}
+                    {/*{addButton}*/}
+                    {/*<IconButton aria-label="Play/pause">*/}
+                    {/*<PlayArrowIcon className={classes.playIcon} />*/}
+                    {/*</IconButton>*/}
+{/*>>>>>>> 16b74ab71d75965e590ebe6ad62bb097d99ce5ec*/}
 
                   </div>
                 </CardContent>
               </section>
               <CardMedia
                 className="cover"
-
                 title="movie cover"
-
-            >
+              >
                 <img src={this.props.imageUrl} />
               </CardMedia>
 

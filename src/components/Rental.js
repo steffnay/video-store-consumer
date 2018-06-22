@@ -32,9 +32,29 @@ class Rental extends Component {
           });
 };
 
+// <input
+// type="text"
+// className="add-item__input"
+// value={this.state.value}
+// onChange={this.onChange}
+// placeholder={this.props.placeholder}
+// />
+// <button
+//   disabled={!this.state.value}
+// className="add-item__button"
+// onClick={this.add}
+// >
+// Add
+// </button>
+
+
   render() {
+    console.log(this.state.returned === false);
     const status = this.state.returned ? "Returned" : "Checked-Out";
-    const checkinButton = <Button variant="raised" color="primary" onClick={() => this.onClickCheckin()}>Return rental</Button>;
+    const checkinButton = () => { if (this.state.returned === null) {
+      return <Button variant="raised" color="primary" onClick={() => this.onClickCheckin()}>Return rental</Button>
+    }};
+
     return (
         <section className="one-rental-section">
           <h4>{this.state.title}</h4>
