@@ -49,11 +49,11 @@ class Rentals extends Component {
   callAPIOverdue = () => {
     console.log('Rental API called for overdue only');
     axios.get(`${RENTAL_URL}overdue/`)
-        .then((response) => this.setState({ rentalsList: response.data }))
-        .catch((error) => {
-          console.log(error);
-          this.setState({ error: error.message });
-        });
+      .then((response) => this.setState({ rentalsList: response.data }))
+      .catch((error) => {
+        console.log(error);
+        this.setState({ error: error.message });
+      });
   };
 
 
@@ -61,7 +61,7 @@ class Rentals extends Component {
   handleChange = name => event => {
     console.log(this.state.checkedA);
     this.setState({ [name]: !event.target.checked });
-    if (this.state.checkedA === true) {
+    if (this.state.checkedA === true || this.state.checkedA == null) {
       this.callAPIOverdue();
     }
     else {

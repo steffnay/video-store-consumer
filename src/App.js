@@ -82,7 +82,7 @@ class App extends Component {
     };
 
     const StatelessCustomer = (props) => {
-      return <span><strong>Customer:</strong> {props.name}</span>;
+      return <span><strong>Customer:</strong> {props.name} </span>;
     };
 
     const StatelessMovie = (props) => {
