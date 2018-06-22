@@ -101,7 +101,7 @@ class App extends Component {
           <section className='body-section background'>
           <div>
             {/*do we want this as position="fixed" ?) */}
-          <AppBar position="static" color="default">
+          <AppBar position="fixed" color="default">
            <Toolbar>
              <section>
                <LinkToButton toLink='/' buttonText='Home' className="ok"/>

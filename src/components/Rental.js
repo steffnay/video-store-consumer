@@ -48,20 +48,21 @@ class Rental extends Component {
 // </button>
 
 
+
+
   render() {
-    console.log(this.state.returned === false);
     const status = this.state.returned ? "Returned" : "Checked-Out";
-    const checkinButton = () => { if (this.state.returned === null) {
-      return <Button variant="raised" color="primary" onClick={() => this.onClickCheckin()}>Return rental</Button>
-    }};
+    const checkinButton = () => {
+      console.log("foooo");
+    //   return <Button variant="raised" color="primary" onClick={() => this.onClickCheckin()}>Return rental</Button>
+    };
 
     return (
         <section className="one-rental-section">
           <h4>{this.state.title}</h4>
           <p>Checked-out by: {this.state.name}</p>
           <p>Status: {status}</p>
-
-          {checkinButton}
+          <p>{checkinButton}</p>
         </section>
     );
   }

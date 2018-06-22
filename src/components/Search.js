@@ -2,14 +2,9 @@ import React, { Component } from 'react';
 import SearchForm from './SearchForm'
 import Movie from './Movie'
 import axios from 'axios';
-
-
-
-import Notification from "./Notification";
-
-
 import Paper from '@material-ui/core/Paper';
 
+const BASE_URL = 'http://localhost:3000/movies';
 
 class Search extends Component {
   constructor(props) {
@@ -22,7 +17,7 @@ class Search extends Component {
   }
 
   addMovieToInventory = (movieData) => {
-    axios.post('http://localhost:3000/movies', movieData)
+    axios.post(BASE_URL, movieData)
      .then((response) => {
        console.log(response);
        this.setState({message: `${response.data.title} added to inventory.`})
@@ -35,9 +30,7 @@ class Search extends Component {
   };
 
   movieSearch = (title) => {
-    const BASE_URL = 'http://localhost:3000/movies?query=';
-
-    axios.get(`${BASE_URL}${title}`)
+    axios.get(`${BASE_URL}?query=${title}`)
     .then((response) => {
       console.log('Rendering Movie List');
         const movieList = response.data.map((result, index) => {
@@ -53,14 +46,9 @@ class Search extends Component {
           />
         )
       });
-      this.setState({
-        results: movieList,
-      });
+      this.setState({ results: movieList,});
     })
-     .catch((error) => {
-       this.setState({ message: error.message });
-    });
-
+    .catch((error) => { this.setState({ message: error.message }) });
   };
 
 
@@ -74,40 +62,24 @@ class Search extends Component {
   //  // }
   // };
 
-  showMessage = () => {
-    if (this.state.message) {
-     return (this.state.message)
-   }
-  }
+
 
 
   render() {
 
-    const showMessage = (message) => {
-      console.log("shit is fucked");
-      // if (this.state.message) {
-      // return <div>{this.state.message}</div>;
+    const showMessage = () => {
+      // console.log("shit is fucked");
+      if (this.state.message) {
+      return <div>{this.state.message}</div>;
 
 
-      return <Notification notificationMessage={message} />;
-
-      // const thisMessage = <Notification notificationMessage={this.state.message} />;
-      //  return thisMessage;
-      // }
+      }
     };
-    // const showMessage = (message) => {
-    //   // if (this.state.message) {
-    //   const thisMessage = <Notification notificationMessage={message} />;
-    //
-    //   // const thisMessage = <Notification notificationMessage={this.state.message} />;
-    //   return thisMessage;
-    //   // }
-    // };
+
 
     return (
       <section className="movie-search">
-        {showMessage(this.state.message)}
-        {/*{<Notification notificationMessage={this.state.message} />}*/}
+        {showMessage}
         <Paper>
           <SearchForm searchCallback={this.movieSearch} />
         </Paper>
