@@ -37,8 +37,7 @@ class Movie extends Component {
     return (
         <Grid item xs={12}>
           {/*<Paper className="outer-paper">*/}
-            <Card className="foo"
-                  >
+            <Card className="foo" >
               <section className="details">
                 <CardContent className="content">
 

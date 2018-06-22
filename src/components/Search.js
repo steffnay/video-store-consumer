@@ -11,6 +11,13 @@ import {
   Link
 } from 'react-router-dom'
 
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import Paper from '@material-ui/core/Paper';
+
 
 class Search extends Component {
   constructor() {
@@ -75,7 +82,9 @@ class Search extends Component {
     return (
       <section className="movie-search">
         <p>{this.showMessage()}</p>
-        <SearchForm searchCallback={this.movieSearch} />
+        <Paper>
+          <SearchForm searchCallback={this.movieSearch} />
+        </Paper>
         {this.state.results}
       </section>
     );

@@ -5,7 +5,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 import Paper from "@material-ui/core/es/Paper/Paper";
 import Rental from "./Rental";
-
+import '../App.css';
 
 
 const RENTAL_URL = 'http://localhost:3000/rentals/';
@@ -104,7 +104,7 @@ class Rentals extends Component {
     return (
         <section className="rentals-section">
           <Paper>
-            <h3>Rentals List</h3>
+            <h2>Rentals List</h2>
             <FormGroup row>
               <FormControlLabel
                 control={

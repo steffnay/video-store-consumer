@@ -1,4 +1,8 @@
 import React, { Component } from 'react';
+import TextField from '@material-ui/core/TextField';
+import '../App.css';
+import Button from '@material-ui/core/Button';
+import Grid from "@material-ui/core/es/Grid/Grid";
 
 class SearchForm extends Component {
   constructor() {
@@ -36,23 +40,27 @@ class SearchForm extends Component {
 
   render() {
 
-    return (
-      <section className="movie-search">
-        <h3 className="movie-search-form__header">Find Movie</h3>
-        <form className="movie-search-form__form" onSubmit={this.onFormSubmit}>
-          <div>
-            <label htmlFor="text" className="movie-search-form__form-label">Title: </label>
-            <input
-              className="movie-search-form__form-textarea"
-              name="text"
-              value={this.state.text}
-              type="text"
-              onChange = {this.onFieldChange}
-              />
-          </div>
 
-          <input type="submit" value="Search" className="movie-search-form__form-button" />
-        </form>
+    const searchButton = <Button variant="raised" type="submit" color="secondary" id="search">Search</Button>;
+
+    return (
+      <section>
+        <h2>Find Movie</h2>
+        <Grid container className="demo" justify="center" spacing={4} id="container">
+
+          <form className="movie-search-form__form" onSubmit={this.onFormSubmit}>
+            <TextField
+              onChange={this.onFieldChange}
+              name="text"
+              label="Title"
+              id="margin-normal"
+              value={this.state.text}
+              id="textField"
+              margin="normal"
+            />
+            {searchButton}
+          </form>
+        </Grid>
       </section>
     );
   }

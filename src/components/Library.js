@@ -7,6 +7,7 @@ import Typography from "@material-ui/core/es/Typography/Typography";
 import Grid from "@material-ui/core/es/Grid/Grid";
 import CardMedia from "@material-ui/core/es/CardMedia/CardMedia";
 import Button from '@material-ui/core/Button';
+import Paper from '@material-ui/core/Paper';
 
 
 const LibraryMovie = (props) => {
@@ -19,8 +20,8 @@ const LibraryMovie = (props) => {
           <CardContent className="content">
             <Typography variant="headline">{props.title}</Typography>
             <Typography variant="subheading" color="textSecondary" className="big-text">
-              <p>Overview: {props.overview}</p>
-              <p>Release Date:{props.release}</p>
+              <p><strong>Overview:</strong> {props.overview}</p>
+              <p><strong>Release Date:</strong>{props.release}</p>
             </Typography>
             <div className="controls">
               {addButton}
@@ -78,8 +79,10 @@ class Library extends Component {
 
     return (
         <section className="movie-list">
-          <h3>Library List</h3>
-          {this.renderLibraryList()}
+          <Paper>
+            <h2>Library List</h2>
+            {this.renderLibraryList()}
+          </Paper>
         </section>
     );
   }
