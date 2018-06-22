@@ -27,7 +27,7 @@ class Movie extends Component {
       overview: this.props.overview,
       external_id: this.props.externalId
     })
-  }
+  };
 
   render() {
     return (
@@ -47,19 +47,10 @@ class Movie extends Component {
                   </Typography>
                   <div className="controls">
                     <button onClick={this.handleClick}>Add to Inventory</button>
-                    {/*<IconButton aria-label="Play/pause">*/}
-                    {/*<PlayArrowIcon className={classes.playIcon} />*/}
-                    {/*</IconButton>*/}
+
 
                   </div>
                 </CardContent>
-
-
-              {/*<h3>{this.props.title}</h3>*/}
-                  {/*<p><img src={this.props.imageUrl} alt="movie cover"/></p>*/}
-              {/*<p>{this.props.overview}</p>*/}
-              {/*<p>{this.props.releaseDate}</p>*/}
-                {/*<button onClick={this.handleClick}>Add to Inventory</button>*/}
               </section>
               <CardMedia
                 className="cover"

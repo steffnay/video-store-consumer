@@ -3,6 +3,7 @@ import axios from 'axios';
 import Switch from '@material-ui/core/Switch';
 
 import Rental from "./Rental";
+import Paper from "@material-ui/core/es/Paper/Paper";
 
 
 const RENTAL_URL = 'http://localhost:3000/rentals/';
@@ -84,6 +85,7 @@ class Rentals extends Component {
 
     return (
         <section className="rentals-section">
+          <Paper>
           <h3>Rentals List</h3>
           <Switch
               checked={this.state.checkedB}
@@ -95,6 +97,7 @@ class Rentals extends Component {
               // value={false}
           />
           {renderRentalsList()}
+          </Paper>
         </section>
     );
   }

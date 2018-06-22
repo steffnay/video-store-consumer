@@ -90,42 +90,42 @@ class App extends Component {
     return (
         <React.Fragment>
           <CssBaseline />
-        <Router>
-          <div>
-            <img src={'https://preview.ibb.co/n6pjXy/blockbusted.png'} alt="blockbusted logo"/>
-            {this.state.message}
-            <span>
-              <p>New Rental</p>
-              <StatelessCustomer name={this.state.rentalCustomerName} />
-              <StatelessMovie title={this.state.rentalMovieTitle} />
-              <StatelessButton handleClick={this.makeNewRental} />
-            </span>
-            <section>
+          <Router>
+            <div>
+              <img src={'https://preview.ibb.co/n6pjXy/blockbusted.png'} alt="blockbusted logo"/>
+              {this.state.message}
+              <span>
+                <p>New Rental</p>
+                <StatelessCustomer name={this.state.rentalCustomerName} />
+                <StatelessMovie title={this.state.rentalMovieTitle} />
+                <StatelessButton handleClick={this.makeNewRental} />
+              </span>
+              <section>
 
-              <LinkToButton toLink='/' buttonText='Home'/>
-              <LinkToButton toLink='/search' buttonText='Search'/>
-              <LinkToButton toLink='/library' buttonText='Library'/>
-              <LinkToButton toLink='/customers' buttonText='Customers'/>
-              <LinkToButton toLink='/rentals' buttonText='Rentals'/>
+                <LinkToButton toLink='/' buttonText='Home'/>
+                <LinkToButton toLink='/search' buttonText='Search'/>
+                <LinkToButton toLink='/library' buttonText='Library'/>
+                <LinkToButton toLink='/customers' buttonText='Customers'/>
+                <LinkToButton toLink='/rentals' buttonText='Rentals'/>
 
-              <hr/>
-              <section className='body-section background'>
+                <hr/>
+                <section className='body-section background'>
 
-                <Grid container justify="center" spacing={8}>
-                  <Grid item xs={9}>
+                  <Grid container justify="center" spacing={8}>
+                    <Grid item xs={9}>
 
-                    <Route exact path="/" component={home}/>
-                    <Route path="/search" component={Search}/>
-                    <Route path="/library" render={()=><Library addMovieToRental={this.addMovie}/>}/>
-                    <Route path="/rentals" component={Rentals}/>
-                    <Route path="/customers" render={()=><Customers addCustomerToRental={this.addCustomer}/>}/>
+                      <Route exact path="/" component={home}/>
+                      <Route path="/search" component={Search}/>
+                      <Route path="/library" render={()=><Library addMovieToRental={this.addMovie}/>}/>
+                      <Route path="/rentals" component={Rentals}/>
+                      <Route path="/customers" render={()=><Customers addCustomerToRental={this.addCustomer}/>}/>
+                    </Grid>
                   </Grid>
-                </Grid>
+                </section>
               </section>
-            </section>
-          </div>
+            </div>
 
-        </Router>
+          </Router>
         </React.Fragment>
     );
   }

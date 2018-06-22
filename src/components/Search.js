@@ -11,6 +11,7 @@ import {
 } from 'react-router-dom'
 import Grid from "@material-ui/core/es/Grid/Grid";
 import Paper from "@material-ui/core/es/Paper/Paper";
+import Notification from "./Notification";
 
 
 class Search extends Component {
@@ -26,8 +27,9 @@ class Search extends Component {
   addMovieToInventory = (movieData) => {
     axios.post('http://localhost:3000/movies', movieData)
      .then((response) => {
-       console.log(response)
+       console.log(response);
        this.setState({message: `${response.data.title} added to inventory.`})
+       // showMessage(this.state.message);
      })
      .catch((error) => {
        console.log(error)
@@ -62,20 +64,49 @@ class Search extends Component {
      .catch((error) => {
        this.setState({ message: error.message });
     });
+    // .then((response) => {
+    //   this.showMessage("foo")
+    // });
 
   };
 
-  showMessage = () => {
-    if (this.state.message) {
-     return (this.state.message)
-   }
-  };
+  // showMessage = (message) => {
+  //   console.log("shit is fucked");
+  //   // if (this.state.message) {
+  //   return <Notification notificationMessage={message} />;
+  //
+  //   // const thisMessage = <Notification notificationMessage={this.state.message} />;
+  //   //  return thisMessage;
+  //  // }
+  // };
 
   render() {
 
+    const showMessage = (message) => {
+      console.log("shit is fucked");
+      // if (this.state.message) {
+      // return <div>{this.state.message}</div>;
+
+
+      return <Notification notificationMessage={message} />;
+
+      // const thisMessage = <Notification notificationMessage={this.state.message} />;
+      //  return thisMessage;
+      // }
+    };
+    // const showMessage = (message) => {
+    //   // if (this.state.message) {
+    //   const thisMessage = <Notification notificationMessage={message} />;
+    //
+    //   // const thisMessage = <Notification notificationMessage={this.state.message} />;
+    //   return thisMessage;
+    //   // }
+    // };
+
     return (
       <section className="movie-search">
-        <p>{this.showMessage()}</p>
+        {showMessage(this.state.message)}
+        {/*{<Notification notificationMessage={this.state.message} />}*/}
         <Paper>
         <SearchForm searchCallback={this.movieSearch} />
         </Paper>
